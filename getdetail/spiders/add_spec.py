@@ -13,12 +13,12 @@ import logging
 
 
 config = {
-		'host':'127.0.0.1',
-		'port':3306,
-		'user':'root',
-		'password':'123',
-		'db':'cyx',
-		'charset':'utf8mb4',
+          'host': '192.168.10.100',
+          'port': 3306,
+          'user': 'afsaas',
+          'password': '218F2AE2-F275-430B-A20B-1FD9E0CAD419',
+          'db': 'cyx',
+          'charset': 'utf8mb4',
 		}
 connection = pymysql.connect(**config)
 
@@ -73,8 +73,7 @@ class SpecsSpider(scrapy.Spider):
 							items.append(sid)
 					# 请求所有车型的
 					for sid in items:
-						sid = 4403
-						# yield Request('https://car.autohome.com.cn/config/series/%s.html'%sid, meta={'series_id': sid}, callback=self.parse_series_get_car_id)
+						sid = 4645
 						yield Request('https://car.autohome.com.cn/config/series/%s.html'%sid, meta={'series_id': sid}, callback=self.parse_series_get_car_id)
 
 

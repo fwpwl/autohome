@@ -190,7 +190,7 @@ class SpecItem(scrapy.Item):
 		try:
 			print('*********************************')
 			with db.cursor() as cursor:
-				sql = "INSERT INTO `specs1` (`id`,`series_id`,i1,i2,i3,i4,i5,i6,i7,i8,i9,i10,i11,i12,i13,i14,i15,i16,i17,i18,i19,i20,config,i300,i301,i302,i303,i304,i305,i306,i307,i308,i309,i310,i311,i312,i313,i314,i315,i316,i317,i318,i319,i320,i321,i322) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+				sql = "INSERT INTO `specs` (`id`,`series_id`,i1,i2,i3,i4,i5,i6,i7,i8,i9,i10,i11,i12,i13,i14,i15,i16,i17,i18,i19,i20,config,i300,i301,i302,i303,i304,i305,i306,i307,i308,i309,i310,i311,i312,i313,i314,i315,i316,i317,i318,i319,i320,i321,i322) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
 				data = (id, series_id, i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13, i14, i15, i16,i17,i18,i19,i20,config,i300,i301,i302,i303,i304,i305,i306,i307,i308,i309,i310,i311,i312,i313,i314,i315,i316,i317,i318,i319,i320,i321,i322)
 				cursor.execute(sql, data)
 				db.commit()
