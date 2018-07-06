@@ -72,3 +72,4 @@ package-lock.json
 *.pid
 assets.json
 .gitignore
+getdetail/__pycache__
