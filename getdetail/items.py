@@ -10,7 +10,6 @@ import pymysql
 
 
 class GetdetailItem(scrapy.Item):
-	# img_num = scrapy.Field()
 	id = scrapy.Field()
 	grade = scrapy.Field()
 	maxprice = scrapy.Field()
@@ -49,6 +48,7 @@ class GetPriceItem(scrapy.Item):
 		except Exception as e:
 			print("save cut_prices fail %s" % e)
 
+
 class GetImagesItem(scrapy.Item):
 	series_id = scrapy.Field()
 	img_url = scrapy.Field()
@@ -62,6 +62,7 @@ class GetImagesItem(scrapy.Item):
 			db.commit()
 		except Exception as e:
 			print("save image fail %s" % e)
+
 
 class GetSeriesItem(scrapy.Item):
 	id = scrapy.Field()
@@ -90,6 +91,7 @@ class ColumnsItem(scrapy.Item):
 			db.commit()
 		except Exception as e:
 			print("save columns fail %s" % e)
+
 
 class SpecItem(scrapy.Item):
 	id = scrapy.Field()
@@ -139,7 +141,6 @@ class SpecItem(scrapy.Item):
 	i321 = scrapy.Field()
 	i322 = scrapy.Field()
 
-
 	def saveto_mysql(self, db):
 		id = int(self.get('id', 0))
 		series_id = self.get('series_id', None)
@@ -188,7 +189,6 @@ class SpecItem(scrapy.Item):
 		i321 = int(self.get('i321', '0'))
 		i322 = int(self.get('i322', '0'))
 		try:
-			print('*********************************')
 			with db.cursor() as cursor:
 				sql = "INSERT INTO `specs` (`id`,`series_id`,i1,i2,i3,i4,i5,i6,i7,i8,i9,i10,i11,i12,i13,i14,i15,i16,i17,i18,i19,i20,config,i300,i301,i302,i303,i304,i305,i306,i307,i308,i309,i310,i311,i312,i313,i314,i315,i316,i317,i318,i319,i320,i321,i322) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
 				data = (id, series_id, i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13, i14, i15, i16,i17,i18,i19,i20,config,i300,i301,i302,i303,i304,i305,i306,i307,i308,i309,i310,i311,i312,i313,i314,i315,i316,i317,i318,i319,i320,i321,i322)
@@ -196,19 +196,6 @@ class SpecItem(scrapy.Item):
 				db.commit()
 		except Exception as e:
 			print("save specs fail %s" % e)
-
-
-		# try:
-		# 	print('*********************************')
-		# 	with db.cursor() as cursor:
-		# 		sql = "INSERT INTO `specs` (`id`,`series_id`,i1,i2,i3,i4,i5,i6,i7,i8,i9,i10,i11,i12,i13,i14,i15,i16,i17,i18,i19,i20,config,i300,i301,i302,i303,i304,i305,i306,i307,i308,i309,i310,i311,i312,i313,i314,i315,i316,i317,i318,i319,i320,i321,i322) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-		# 		data = (id, series_id, i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13, i14, i15, i16,i17,i18,i19,i20,config,i300,i301,i302,i303,i304,i305,i306,i307,i308,i309,i310,i311,i312,i313,i314,i315,i316,i317,i318,i319,i320,i321,i322)
-		# 		cursor.execute(sql, data)
-		# 		print(44444444444433333)
-		# 		db.commit()
-		# 		print(44444444444444)
-		# except Exception as e:
-		# 	print("save specs fail %s" % e)
 
 
 class DealersItem(scrapy.Item):
@@ -233,6 +220,7 @@ class DealersItem(scrapy.Item):
 			db.commit()
 		except Exception as e:
 			print("save dealers fail %s" % e)
+
 
 class GetMaodouItem(scrapy.Item):
 	name = scrapy.Field()
@@ -260,9 +248,6 @@ class GetArticlesItem(scrapy.Item):
 	author = scrapy.Field()
 	comment = scrapy.Field()
 
-	
-
-
 	def saveto_mysql(self, db):
 		title = self.get('title', '')
 		t_url = self.get('t_url', '')
@@ -270,7 +255,6 @@ class GetArticlesItem(scrapy.Item):
 		comment = self.get('comment', '')
 		try:
 			with db.cursor() as cursor:
-				# sql = "insert into art_recommends(title, t_url, author,comment) values("'"%s"'", "'"%s"'", "'"%s"'", "'"%s"'")"
 				sql = "insert into art_recommends(title, t_url, author,comment) values("'"%s"'","'"%s"'","'"%s"'","'"%s"'")"
 				data = (pymysql.escape_string(title), pymysql.escape_string(t_url), pymysql.escape_string(author), pymysql.escape_string(comment))
 				print(sql%data + ';')
@@ -293,6 +277,7 @@ class ImgItem(scrapy.Item):
 			db.commit()
 		except Exception as e:
 			print("save img fail %s" % e)
+
 
 class DealerItem(scrapy.Item):
 	id = scrapy.Field()
@@ -321,6 +306,7 @@ class DealerItem(scrapy.Item):
 		except Exception as e:
 			print("save img fail %s" % e)
 
+
 class ScoreItem(scrapy.Item):
 	series_id = scrapy.Field()
 	score = scrapy.Field()
@@ -333,6 +319,7 @@ class ScoreItem(scrapy.Item):
 			db.commit()
 		except Exception as e:
 			print("save img fail %s" % e)
+
 
 class PinPaiItem(scrapy.Item):
 	series_id = scrapy.Field()
@@ -347,6 +334,7 @@ class PinPaiItem(scrapy.Item):
 		except Exception as e:
 			print("save img fail %s" % e)
 
+
 class PraiseNumItem(scrapy.Item):
 	id = scrapy.Field()
 	praise_num = scrapy.Field()
@@ -359,6 +347,7 @@ class PraiseNumItem(scrapy.Item):
 			db.commit()
 		except Exception as e:
 			print("save img fail %s" % e)
+
 
 class BaodianItem(scrapy.Item):
 	series_id = scrapy.Field()
@@ -373,6 +362,7 @@ class BaodianItem(scrapy.Item):
 			db.commit()
 		except Exception as e:
 			print("save img fail %s" % e)
+
 
 class GetNewCarsItem(scrapy.Item):
 	series_id = scrapy.Field()
@@ -393,6 +383,7 @@ class GetNewCarsItem(scrapy.Item):
 			db.commit()
 		except Exception as e:
 			print("save img fail %s" % e)
+
 
 class CheZhuZhiJiaItem(scrapy.Item):
 	name = scrapy.Field()
@@ -430,4 +421,3 @@ class DealerLoctionItem(scrapy.Item):
 			db.commit()
 		except Exception as e:
 			print("save img fail %s" % e)
-
