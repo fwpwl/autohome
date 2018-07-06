@@ -29,7 +29,7 @@ def get_car_id(id):
 				cursor.execute(sql, (id))
 				id = cursor.fetchone()
 				if id:
-					return id['id']
+					return True
 				else:
 					return None
 		except Exception as e:
@@ -73,7 +73,7 @@ class SpecsSpider(scrapy.Spider):
 							items.append(sid)
 					# 请求所有车型的
 					for sid in items:
-						sid = 4645
+						sid = 905
 						yield Request('https://car.autohome.com.cn/config/series/%s.html'%sid, meta={'series_id': sid}, callback=self.parse_series_get_car_id)
 
 

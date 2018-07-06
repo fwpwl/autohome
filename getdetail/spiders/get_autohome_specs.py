@@ -100,7 +100,6 @@ class SpecsSpider(scrapy.Spider):
 			item['id'] = int(response.meta['car_id'])
 			print(item['id'])
 			car_id = get_car_id(item['id'])
-			print(1111111111111111111111111111)
 			print(car_id)
 			if not car_id:
 				item['series_id'] = int(response.meta['series_id'])

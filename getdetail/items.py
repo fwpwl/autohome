@@ -218,21 +218,17 @@ class DealersItem(scrapy.Item):
 	sell_phone = scrapy.Field()
 	sale_range = scrapy.Field()
 	sale_to = scrapy.Field()
-	city = scrapy.Field()
 	company = scrapy.Field()
 	province_id = scrapy.Field()
 	city_id = scrapy.Field()
 	county_id = scrapy.Field()
-	lon = scrapy.Field()
-	lat = scrapy.Field()
 	contacts = scrapy.Field()
-
 
 	def saveto_mysql(self, db):
 		try:
 			with db.cursor() as cursor:
-				sql = "insert into dealers(id, name, address, sell_phone, sale_range, sale_to, city, company, province_id, city_id, county_id, lon, lat, contacts) values(%s, %s, %s, %s, %s, %s, %s)"
-				data = (self.get('id', ''), self.get('name', ''), self.get('address', ''), self.get('sellphone', ''), self.get('sale_range', ''), self.get('saleto', ''), self.get('city', ''),self.get('company', ''),self.get('province_id', ''),self.get('city_id', ''),self.get('county_id', ''),self.get('lon', ''),self.get('lat', ''), self.get('contacts', ''))
+				sql = "insert into dealers(id, name, address, sell_phone, sale_range, sale_to, company, province_id, city_id, county_id, contacts) values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+				data = (self.get('id', ''), self.get('name', ''), self.get('address', ''), self.get('sell_phone', ''), self.get('sale_range', ''), self.get('sale_to', ''),self.get('company', ''),self.get('province_id', ''),self.get('city_id', ''),self.get('county_id', ''), self.get('contacts', ''))
 				cursor.execute(sql, data)
 			db.commit()
 		except Exception as e:
@@ -299,7 +295,7 @@ class ImgItem(scrapy.Item):
 			print("save img fail %s" % e)
 
 class DealerItem(scrapy.Item):
-	dealer_id = scrapy.Field()
+	id = scrapy.Field()
 	series_id = scrapy.Field()
 	name = scrapy.Field()
 	company = scrapy.Field()
@@ -314,11 +310,12 @@ class DealerItem(scrapy.Item):
 	sellphone = scrapy.Field()
 	maxprice = scrapy.Field()
 	minprice = scrapy.Field()
+
 	def saveto_mysql(self, db):
 		try:
 			with db.cursor() as cursor:
-				sql = "insert into dealer(dealer_id, series_id, name, company, address,province_id, city_id, county_id,saleto,lon,lat,contacts,sellphone,maxprice,minprice) values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s,%s, %s, %s, %s, %s)"
-				data = (self.get('dealer_id', ''), self.get('series_id', ''),self.get('name', ''),self.get('company', ''),self.get('address', ''),self.get('province_id', ''),self.get('city_id', ''),self.get('county_id', ''), self.get('saleto', ''),self.get('lon', ''),self.get('lat', ''),self.get('contacts', ''),self.get('sellphone', ''), self.get('maxprice', ''),self.get('minprice', ''),)
+				sql = "insert into dealer(id, series_id, name, company, address,province_id, city_id, county_id,saleto,lon,lat,contacts,sellphone,maxprice,minprice) values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s,%s, %s, %s, %s, %s)"
+				data = (self.get('id', ''), self.get('series_id', ''),self.get('name', ''),self.get('company', ''),self.get('address', ''),self.get('province_id', ''),self.get('city_id', ''),self.get('county_id', ''), self.get('saleto', ''),self.get('lon', ''),self.get('lat', ''),self.get('contacts', ''),self.get('sellphone', ''), self.get('maxprice', ''),self.get('minprice', ''),)
 				cursor.execute(sql, data)
 			db.commit()
 		except Exception as e:
@@ -383,15 +380,15 @@ class GetNewCarsItem(scrapy.Item):
 	img_url = scrapy.Field()
 	sale_at = scrapy.Field()
 	ntype = scrapy.Field()
-	maxprice = scrapy.Field()
-	minprice = scrapy.Field()
+	price = scrapy.Field()
+	level = scrapy.Field()
 	images_urls = scrapy.Field()
 
 	def saveto_mysql(self, db):
 		try:
 			with db.cursor() as cursor:
-				sql = "insert into new_series1(series_id, name, img_url, sale_at, ntype, maxprice, minprice) values(%s, %s, %s,%s, %s, %s,%s)"
-				data = (self.get('series_id', ''), self.get('name', ''), self.get('img_url', ''),self.get('sale_at', ''),self.get('ntype', ''),self.get('maxprice', ''),self.get('minprice', ''))
+				sql = "insert into new_series(series_id, name, img_url, sale_at, ntype, price,level) values(%s, %s,%s, %s, %s,%s,%s)"
+				data = (self.get('series_id', ''), self.get('name', ''), self.get('img_url', ''),self.get('sale_at', ''),self.get('ntype', ''),self.get('price', ''), self.get('level', ''))
 				cursor.execute(sql, data)
 			db.commit()
 		except Exception as e:
@@ -413,3 +410,24 @@ class CheZhuZhiJiaItem(scrapy.Item):
 			db.commit()
 		except Exception as e:
 			print("save img fail %s" % e)
+
+
+class DealerLoctionItem(scrapy.Item):
+	id = scrapy.Field()
+	province_id = scrapy.Field()
+	city_id = scrapy.Field()
+	sid = scrapy.Field()
+	loc = scrapy.Field()
+	lon = scrapy.Field()
+	lat = scrapy.Field()
+
+	def saveto_mysql(self, db):
+		try:
+			with db.cursor() as cursor:
+				sql = "insert into cyx.dealer_location(id, province_id, city_id, sid, loc, lon, lat) values(%s,%s,%s,%s,ST_PointFromText(%s),%s,%s)"
+				data = ( self.get('id', ''), self.get('province_id', ''),self.get('city_id', ''),self.get('sid', ''),self.get('loc', ''), self.get('lon', ''),self.get('lat', ''))
+				cursor.execute(sql, data)
+			db.commit()
+		except Exception as e:
+			print("save img fail %s" % e)
+

@@ -45,8 +45,7 @@ class DealersSpider(scrapy.Spider):
                 urls.append('https://dealer.m.autohome.com.cn/api/BaseData/GetDealerListPager?seriesId=%s&specId=0&kindId=1&pageIndex=%s&cityId=0&pageSize=100&orderType=0&type=1&lat=&lon='%(series_id, i))
         for url in urls:
             yield Request(url, callback=self.parse_spec)
-
-        
+   
     def parse_spec(self, response):
         res = json.loads(response.text)
         item = items.DealerItem()
