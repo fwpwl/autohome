@@ -71,4 +71,4 @@ obj/
 package-lock.json
 *.pid
 assets.json
-
+.gitignore
