@@ -67,10 +67,10 @@ CONCURRENT_REQUESTS_PER_IP = 1
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
    'getdetail.pipelines.GetDetailPipeline': 300,
-   'getdetail.pipelines.ImageDownloadPipeline': 1,
+   # 'getdetail.pipelines.ImageDownloadPipeline': 1,
 }
-IMAGES_URLS_FIELD = 'img_url'
-IMAGES_STORE = 'images/'
+# IMAGES_URLS_FIELD = 'img_url'
+# IMAGES_STORE = 'images/'
 #AUTOTHROTTLE_ENABLED = True
 # The initial download delay
 #AUTOTHROTTLE_START_DELAY = 5
