@@ -144,7 +144,7 @@ class SpecsSpider(scrapy.Spider):
 
 				i300 = item['i2']
 				if len(i300) > 10:
-					i300 = price.split('~')[0]
+					i300 = i300.split('~')[0]
 				try:
 					item['i300'] = float(i300[:-1])
 				except Exception as e:
