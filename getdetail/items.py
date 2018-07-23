@@ -49,21 +49,6 @@ class GetPriceItem(scrapy.Item):
 			print("save cut_prices fail %s" % e)
 
 
-class GetImagesItem(scrapy.Item):
-	series_id = scrapy.Field()
-	img_url = scrapy.Field()
-
-	def saveto_mysql(self, db):
-		try:
-			with db.cursor() as cursor:
-				sql = "insert into images(series_id, img_url) values(%s, %s)"
-				data = (self.get('series_id', ''), self.get('img_url', ''))
-				cursor.execute(sql, data)
-			db.commit()
-		except Exception as e:
-			print("save image fail %s" % e)
-
-
 class GetSeriesItem(scrapy.Item):
 	id = scrapy.Field()
 	name = scrapy.Field()
@@ -222,26 +207,6 @@ class DealersItem(scrapy.Item):
 			print("save dealers fail %s" % e)
 
 
-class GetMaodouItem(scrapy.Item):
-	name = scrapy.Field()
-	factoryprice = scrapy.Field()
-	shoufu = scrapy.Field()
-	yuegong = scrapy.Field()
-	qishu = scrapy.Field()
-	fenqi = scrapy.Field()
-	quankuan = scrapy.Field()
-
-	def saveto_mysql(self, db):
-		try:
-			with db.cursor() as cursor:
-				sql = "insert into maodou(name, factoryprice, shoufu, yuegong, qishu, fenqi, quankuan) values(%s, %s, %s, %s, %s, %s, %s)"
-				data = (self.get('name', ''), self.get('factoryprice', ''), self.get('shoufu', ''), self.get('yuegong', ''), self.get('qishu', ''), self.get('fenqi', ''), self.get('quankuan', ''))
-				cursor.execute(sql, data)
-			db.commit()
-		except Exception as e:
-			print("save dealers fail %s" % e)
-
-
 class GetArticlesItem(scrapy.Item):
 	title = scrapy.Field()
 	t_url = scrapy.Field()
@@ -315,20 +280,6 @@ class ScoreItem(scrapy.Item):
 			with db.cursor() as cursor:
 				sql = "insert into public_praise_score(series_id, score) values(%s, %s)"
 				data = (self.get('series_id', ''), self.get('score', ''))
-				cursor.execute(sql, data)
-			db.commit()
-		except Exception as e:
-			print("save img fail %s" % e)
-
-
-class PinPaiItem(scrapy.Item):
-	series_id = scrapy.Field()
-	series_name = scrapy.Field()
-	def saveto_mysql(self, db):
-		try:
-			with db.cursor() as cursor:
-				sql = "insert into factory(series_id, series_name) values(%s, %s)"
-				data = (self.get('series_id', ''), self.get('series_name', ''))
 				cursor.execute(sql, data)
 			db.commit()
 		except Exception as e:
