@@ -32,6 +32,8 @@ class DealersSpider(scrapy.Spider):
                 start_urls.append('https://dealer.m.autohome.com.cn/api/BaseData/GetDealerListPager?seriesId=%s&specId=0&kindId=1&pageIndex=1&cityId=0&pageSize=100&orderType=0&type=1&lat=&lon='%id[0])
     except Exception as e:
         print("update series fail %s" % e)
+    else:
+        connection.close()
 
     def parse(self, response):
         urls = []
@@ -66,5 +68,3 @@ class DealersSpider(scrapy.Spider):
             item['sale_range'] = spec['OrderRangeTitle']
             item['sellphone'] = spec['SellPhone']
             yield item
-
-    connection.close()

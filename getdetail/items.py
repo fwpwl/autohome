@@ -222,9 +222,7 @@ class GetArticlesItem(scrapy.Item):
 			with db.cursor() as cursor:
 				sql = "insert into art_recommends(title, t_url, author,comment) values("'"%s"'","'"%s"'","'"%s"'","'"%s"'")"
 				data = (pymysql.escape_string(title), pymysql.escape_string(t_url), pymysql.escape_string(author), pymysql.escape_string(comment))
-				print(sql%data + ';')
 				cursor.execute(sql, data)
-
 			db.commit()
 		except Exception as e:
 			print("insert art_recommends fail %s" % e)
