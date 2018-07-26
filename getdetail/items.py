@@ -402,3 +402,122 @@ class EcarsssItem(scrapy.Item):
                 db.commit()
         except Exception as e:
             print("save cut_price1 fail %s"% e)
+
+class BrandsItem(scrapy.Item):
+    id = scrapy.Field()
+    logo = scrapy.Field()
+    name = scrapy.Field()
+    items = scrapy.Field()
+    status = scrapy.Field()
+    english_name = scrapy.Field()
+    alias_name = scrapy.Field()
+    spell = scrapy.Field()
+    images = scrapy.Field()
+
+    def saveto_mysql(self, db):
+        try:
+            with db.cursor() as cursor:
+                sql = "insert into brands1(id,logo,name,items,status,english_name,alias_name,spell) values(%s,%s,%s,%s,%s,%s,%s,%s)"
+                data = (self.get('id', ''), self.get('logo', ''),self.get('name', ''), self.get('items', ''),self.get('status', ''), self.get('english_name', ''),self.get('alias_name', ''), self.get('spell', ''))
+                cursor.execute(sql, data)
+            db.commit()
+        except Exception as e:
+            print("save brands1 fail %s" % e)
+
+
+class KoubeiItem(scrapy.Item):
+    # define the fields for your item here like:
+    # name = scrapy.Field()
+
+
+
+    series_id = scrapy.Field()
+    reviewer = scrapy.Field()
+    carname = scrapy.Field()
+    buy_city = scrapy.Field()
+    buy_dealer = scrapy.Field()
+    buy_at = scrapy.Field()
+    price = scrapy.Field()
+    oil_wear = scrapy.Field()
+    road_haul = scrapy.Field()
+    buy_purpose = scrapy.Field()
+    publish_at = scrapy.Field()
+    title = scrapy.Field()
+    comment = scrapy.Field()
+    series_name = scrapy.Field()
+    sat = scrapy.Field()
+    dissat = scrapy.Field()
+    score = scrapy.Field()
+
+    def saveto_mysql(self, db):
+        series_id = self.get('series_id', '')
+        reviewer = self.get('reviewer', '')
+        carname = self.get('carname', '')
+        buy_city = self.get('buy_city', '')
+        buy_dealer = self.get('buy_dealer', '')
+        buy_at = self.get('buy_at', '')
+        price = self.get('price', '')
+        oil_wear = self.get('oil_wear', '')
+        road_haul = self.get('road_haul', '')
+        buy_purpose = self.get('buy_purpose', '')
+        publish_at = self.get('publish_at', '')
+        title = self.get('title', '')
+        comment = self.get('comment', '')
+        series_name = self.get('series_name', '')
+        sat = self.get('sat','')
+        dissat = self.get('dissat','')
+        score = self.get('score','')
+        try:
+            with db.cursor() as cursor:
+                #f = open('series_aaa.sql', 'a+')
+                sql = "INSERT INTO `series_public_praise_new`(series_id,reviewer,carname,buy_city,buy_dealer,buy_at,price,oil_wear,road_haul,buy_purpose,publish_at,title,comment,series_name,sat,dissat,score) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+
+                data = (
+                series_id, reviewer, carname, buy_city, buy_dealer, buy_at, price, oil_wear, road_haul, buy_purpose,
+                publish_at, title, comment, series_name,sat,dissat,score)
+
+                cursor.execute(sql, data)
+                db.commit()
+                # f.write(
+                #     'INSERT INTO `series_public_praise`(series_id,reviewer,carname,buy_city,buy_dealer,buy_at,price,oil_wear,road_haul,buy_purpose,publish_at,title,comment,sat,dissat,score) VALUES ('"'%s'"','"'%s'"','"'%s'"','"'%s'"','"'%s'"','"'%s'"','"'%s'"','"'%s'"','"'%s'"','"'%s'"','"'%s'"','"'%s'"','"'%s'"','"'%s'"','"'%s'"','"'%s'"')' % (
+                #     series_id, reviewer, carname, buy_city, buy_dealer, buy_at, price, oil_wear, road_haul, buy_purpose,publish_at, title, comment,sat,dissat,score) + ';'+'\n')
+                # #sys.stdout = old  # 还原原系统输出
+                # f.close()
+        except Exception as e:
+            print("save series_public_praise fail %s" % e)
+
+class SeriesItem(scrapy.Item):
+    # define the fields for your item here like:
+    # name = scrapy.Field()
+    id = scrapy.Field()
+    name = scrapy.Field()
+    maxprice = scrapy.Field()
+    minprice = scrapy.Field()
+    brand_id = scrapy.Field()
+    factory = scrapy.Field()
+    grade = scrapy.Field()
+    img_url = scrapy.Field()
+    d_url = scrapy.Field()
+
+    def saveto_mysql(self, db):
+        id = self.get('id', '')
+        name = self.get('name', '')
+        maxprice = self.get('maxprice', '')
+        minprice = self.get('minprice', '')
+        brand_id = self.get('brand_id', '')
+        factory = self.get('factory', '')
+        grade = self.get('grade', '')
+        img_url = self.get('img_url', '')
+        d_url = self.get('d_url', '')
+        try:
+            with db.cursor() as cursor:
+                sql = "INSERT INTO`series1`(id,name,maxprice,minprice,brand_id,factory,grade,img_url,d_url) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+                data = (
+                    id,name,maxprice, minprice, brand_id,factory,grade,img_url,d_url)
+                cursor.execute(sql, data)
+                db.commit()
+
+        except Exception as e:
+
+            print('*' * 100)
+            print(e)
