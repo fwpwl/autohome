@@ -17,7 +17,7 @@ config = {
           'port': 3306,
           'user':'root',
           'password':'123',
-          'db':'scrapy',
+          'db':'cyx',
           'charset':'utf8mb4',
           }
 connection = pymysql.connect(**config)
