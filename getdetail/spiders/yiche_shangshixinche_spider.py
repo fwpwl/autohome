@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 import scrapy
 from getdetail import items
 from scrapy.http import Request
@@ -66,6 +65,7 @@ class YiCheCarsSpider(scrapy.Spider):
         'https://carapi.app.yiche.com/car/GetSerialInfoForNewByMonth?year=2018&month=4&pageindex=1&pagesize=200',
         'https://carapi.app.yiche.com/car/GetSerialInfoForNewByMonth?year=2018&month=5&pageindex=1&pagesize=200',
         'https://carapi.app.yiche.com/car/GetSerialInfoForNewByMonth?year=2018&month=6&pageindex=1&pagesize=200',
+        'https://carapi.app.yiche.com/car/GetSerialInfoForNewByMonth?year=2018&month=7&pageindex=1&pagesize=200',
         ]
 
     def parse(self, response):
