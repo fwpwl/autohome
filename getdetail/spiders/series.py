@@ -3,7 +3,7 @@ import scrapy
 import pymysql
 import pymysql.cursors
 import json
-from series.items import SeriesItem
+from getdetail.items import SeriesItem
 
 
 

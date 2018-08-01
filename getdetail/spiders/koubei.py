@@ -2,7 +2,7 @@
 
 import scrapy
 import json
-from koubei.items import KoubeiItem
+from getdetail.items import KoubeiItem
 import re
 import pymysql
 import pymysql.cursors
