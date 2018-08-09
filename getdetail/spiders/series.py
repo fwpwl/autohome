@@ -33,7 +33,7 @@ def get_id(table_name,table_id):
 
 
 class SeriesspiderSpider(scrapy.Spider):
-    name = 'seriesspider'
+    name = 'series'
 
     def start_requests(self):
         brands_id = []

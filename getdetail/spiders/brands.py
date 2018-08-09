@@ -9,7 +9,7 @@ import pymysql.cursors
 
 
 class BrandsspiderSpider(scrapy.Spider):
-    name = 'brandsspider'
+    name = 'brands'
     allowed_domains = ['autohome.com']
     start_urls = ['https://car.m.autohome.com.cn/']
 
